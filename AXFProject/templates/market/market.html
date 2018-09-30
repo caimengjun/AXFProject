@@ -1,0 +1,96 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{#导入css#}
+{% block extCSS %}
+{#    继承#}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/market/market.css' %}">
+{% endblock %}
+
+{% block extJS %}
+    <script type="text/javascript" src="{% static 'app/market/market.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="market">
+        <aside>
+            <ul>
+                {% for foodtype in foodtypes %}
+                    <li>
+                    {% ifequal foodtype.typeid typeid%}
+                        <span class="yellowSlide"></span>
+                        <a href="#">{{ foodtype.typename }}</a>
+                        {% else %}
+                        <a href="{% url 'axf:marketWithParm' foodtype.typeid 0 0%}">{{ foodtype.typename }}</a>
+                    {% endifequal %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+    <section>
+        <nav>
+            <ul>
+                <li><span id="alltypes">全部分类<span id="glyphiconTypes" class="glyphicon glyphicon-chevron-down"></span></span></li>
+                <li><span id="allsort">综合排序<span id="glyphiconSort" class="glyphicon glyphicon-chevron-down"></span></span></li>
+            </ul>
+        </nav>
+        <menu>
+            <ul>
+                {% for good in goods %}
+                    <li>
+
+                    <a href="">
+                    <img src="{{ good.productimg }}" alt="">
+                    <div class="shoppingInfo">
+                        <h6>{{ good.productlongname }}</h6>
+                        <p class="detailTag">
+                            <span>精选</span>
+                            <span></span>
+                        </p>
+                        <span>{{ good.specifics }}</span>
+                        <p class="price">
+                            <span>${{ good.price }}</span>
+                            <s>${{good.marketprice}}</s>
+                        </p>
+                    </div>
+                    </a>
+                    <section>
+                        <button class = "subToCart" goodsid = "{{ good.id }}">-</button>
+                        {% for cart in carts %}
+                            {% ifequal good.id cart.c_goods.id%}
+                                <span>{{ cart.c_num }}</span>
+                            {% endifequal %}
+                        {% endfor %}
+
+                        <button goodsid = "{{ good.id }}" class="add_to_cart_button">+</button>
+                    </section>
+
+
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+{#        全部分类#}
+            <div id="type_container">
+                <div>
+                    {% for child in allChild %}
+                        <a href="{% url 'axf:marketWithParm' typeid child.1 0%}">
+                        <span>{{ child.0}}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        <div id="allsortrule">
+            <div>
+            <a href="{% url 'axf:marketWithParm' typeid childid 0 %}"><span>综合排序</span></a>
+            <a href="{% url 'axf:marketWithParm' typeid childid 1 %}"><span>销量排序</span></a>
+            <a href="{% url 'axf:marketWithParm' typeid childid 2 %}"><span>价格升序</span></a>
+            <a href="{% url 'axf:marketWithParm' typeid childid 3 %}"><span>价格降序</span></a>
+            </div>
+        </div>
+        </menu>
+    </section>
+    </div>
+{% endblock %}
