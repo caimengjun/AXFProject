@@ -1,0 +1,160 @@
+{% extends 'base_main.html' %}
+
+{% load static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/mine/mine.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div id="mine">
+        <div class="fixed">
+            {% if user %}
+                <img src="{{ imgUrl }}" alt="">
+                {% else %}
+                 <span style="color: red" class="glyphicon glyphicon-user"></span>
+            {% endif %}
+
+
+
+            <p>
+                {% if user %}
+                    {{ user.u_name }}
+                    {% else %}
+                     <a href="{% url 'axf:login' %}">未登录</a>
+                {% endif %}
+            </p>
+
+
+            <p> <span class="glyphicon glyphicon-fire"></span><span>等级</span></p>
+
+            {% if user %}
+                    {% else %}
+                    <a id="regis" href="{% url 'axf:register' %}">注册</a>
+            {% endif %}
+
+            <p>
+                <span class="glyphicon glyphicon-heart"></span>
+                商品收藏
+
+            </p>
+        </div>
+        <section class="mine">
+            <p>
+                <span>我的订单</span>
+                <a href="#">查看全部订单&gt;</a>
+            </p>
+            <nav id="nav">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-usd"></span>
+                                   {% ifnotequal nopay 0  %}
+                                        <span style="background: red " class="badge">{{ nopay }}</span>
+                                   {% endifnotequal %}
+                                </dt>
+                                <dd>待付款</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-envelope"></span>
+                                    {% ifnotequal noCollect 0  %}
+                                        <span style="background: red " class="badge">{{ noCollect }}</span>
+                                   {% endifnotequal %}
+
+                                </dt>
+                                <dd>待收货</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-pencil"></span>
+                                     {% ifnotequal noEvaluate 0  %}
+                                        <span style="background: red " class="badge">{{ noEvaluate }}</span>
+                                   {% endifnotequal %}
+                                </dt>
+                                <dd>待评价</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-transfer"></span>
+                                     {% ifnotequal returnGoods 0  %}
+                                        <span style="background: red " class="badge">{{ returnGood }}</span>
+                                   {% endifnotequal %}
+                                </dt>
+                                <dd>退款/售后</dd>
+                            </dl>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <menu>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-bullhorn"></span></dt>
+                                <dd>积分商城</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-credit-card"></span></dt>
+                                <dd>优惠券</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-credit-card"></span></dt>
+                                <dd>收货地址</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-phone-alt"></span></dt>
+                                <dd>客服/反馈</dd>
+                            </dl>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <dl>
+                                <dt><span class="glyphicon glyphicon-asterisk"></span></dt>
+                                <dd>关于我们</dd>
+                            </dl>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+            </menu>
+            <p>
+                <a href="{% url 'axf:loginout' %}">退出账号</a>
+            </p>
+        </section>
+
+
+
+
+
+    </div>
+
+{% endblock %}

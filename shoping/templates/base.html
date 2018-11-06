@@ -1,0 +1,43 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0" />
+    <title> {% block title %}{% endblock %}</title>
+{#    导入通用css  #}
+{#    <link rel="stylesheet" href="{% static '' %}">#}
+     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="{%  static 'css/reset.css' %}">
+     {% block extCSS %}
+{#        挖坑, 用于扩展css#}
+     {% endblock %}
+</head>
+<body>
+{#   将页面划分成多块#}
+    {% block head %}
+{#        放头的#}
+    
+    {% endblock %}
+
+    {% block content %}
+{#        放内容的#}
+    
+    {% endblock %}
+
+    {% block foot %}
+{#        放脚的#}
+    
+    {% endblock %}
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.js"></script>
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+   {% block extJS %}
+{#       挖坑,用于扩展js#}
+   {% endblock %}
+</body>
+</html>

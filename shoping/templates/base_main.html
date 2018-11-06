@@ -1,0 +1,72 @@
+{#继承#}
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{#引入该HTML对应的css#}
+
+{% block extCSS %}
+   {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/base_main.css'%}">
+{% endblock %}
+
+
+
+
+{#填坑#}
+
+{% block head %}
+{#    头#}
+    <header>
+
+    </header>
+
+{% endblock %}
+
+
+{% block foot %}
+    <footer>
+        <a href="{% url 'axf:home' %}" class="home">
+            <dl>
+                <dt><span></span></dt>
+                <dd>主页</dd>
+            </dl>
+        </a>
+        <a href="{% url 'axf:market' %}" class="market">
+            <dl>
+                <dt><span></span></dt>
+                <dd>闪购</dd>
+            </dl>
+        </a>
+       <a href="{% url 'axf:cart' %}" class="cart">
+            <dl>
+                <dt><span></span></dt>
+                <dd>购物车</dd>
+            </dl>
+        </a>
+        <a href="{% url 'axf:mine' %}" class="mine">
+            <dl>
+                <dt><span></span></dt>
+                <dd>我的</dd>
+            </dl>
+        </a>
+    </footer>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
